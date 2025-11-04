@@ -1,7 +1,7 @@
 import { Card, CardMedia, CardContent, Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const ProductCard = ({ res }) => {
+const RestroCard = ({ res }) => {
   const navigate = useNavigate();
 
   const onCardClick = () => {
@@ -187,4 +187,4 @@ const ProductCard = ({ res }) => {
   );
 };
 
-export default ProductCard;
+export default RestroCard;

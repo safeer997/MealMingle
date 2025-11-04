@@ -12,7 +12,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import ProductCard from '../components/ProductCard.jsx';
+import RestroCard from '../components/RestroCard.jsx';
 import axios from 'axios';
 
 const swiperSlidesData = [
@@ -364,7 +364,7 @@ const Home = () => {
         {!loading && restaurants.length > 0 && (
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {restaurants.map((res) => (
-              <ProductCard key={res.restaurant_id} res={res} />
+              <RestroCard key={res.restaurant_id} res={res} />
             ))}
           </Box>
         )}
