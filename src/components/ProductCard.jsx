@@ -1,11 +1,4 @@
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  Box,
-  Typography,
-  Rating,
-} from '@mui/material';
+import { Card, CardMedia, CardContent, Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const ProductCard = ({ res }) => {
@@ -23,7 +16,7 @@ const ProductCard = ({ res }) => {
       return 'Location';
     }
     const parts = addr.split(',');
-    return parts.length >= 2 ? parts[parts.length - 2].trim() : 'Location';
+    return parts.length >= 2 ? parts.slice(-2).join(', ').trim() : 'Location';
   };
 
   const cityName = extractCity(res.address_complete);
@@ -32,113 +25,75 @@ const ProductCard = ({ res }) => {
     <Card
       onClick={onCardClick}
       sx={{
-        borderRadius: '10px',
+        borderRadius: '16px',
         overflow: 'hidden',
         cursor: 'pointer',
         transition: 'box-shadow 0.2s ease',
-        display: 'flex',
-        flexDirection: 'row',
         boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
         border: 'none',
-        '&:hover': {
-          boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
-        },
+        background: '#fff',
+        p: 0,
       }}
     >
-      <CardMedia
-        component='img'
-        image='https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=800&q=60'
-        alt={res.restaurant_name}
-        sx={{ width: 160, height: 180, objectFit: 'cover' }} 
-      />
-
-      <CardContent sx={{ p: 1.5 }}>
-        <Box
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'stretch',
+        }}
+      >
+        <CardMedia
+          component='img'
+          image='https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=800&q=60'
+          alt={res.restaurant_name}
           sx={{
+            width: 124,
+            height: 128,
+            objectFit: 'cover',
+            borderRadius: '14px',
+            display: 'block',
+            flexShrink: 0,
+            marginLeft: '12px',
+          }}
+        />
+
+        <CardContent
+          sx={{
+            flex: 1,
+            py: 0, // removes default vertical padding
+            px: 2, // keeps only horizontal padding
+            minHeight: 130,
+            height: 130,
+            boxSizing: 'border-box',
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'space-between',
-            alignItems: 'flex-start',
-            gap: 1,
-            mb: 0.8,
           }}
         >
-          <Box sx={{ flex: 1, minWidth: 0 }}>
+          {/* Top section */}
+          <Box>
             <Typography
               sx={{
-                fontSize: 15,
+                fontSize: 18,
                 fontWeight: '700',
-                color: '#1a1a1a',
-                mb: 0.3,
+                color: '#3b3b3b',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
+                mt: 0,
               }}
             >
               {res.restaurant_name}
             </Typography>
-            <Typography sx={{ fontSize: 12, color: '#999', fontWeight: '400' }}>
-              Cakes, Pastry, Pastas
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 0.3,
-              flexShrink: 0,
-            }}
-          >
             <Typography
-              sx={{ fontSize: 13, fontWeight: '700', color: '#1a1a1a' }}
+              sx={{ fontSize: 13, color: '#9e9e9e', fontWeight: 400 }}
             >
-              4.5
-            </Typography>
-            <Rating
-              value={4.5}
-              readOnly
-              size='small'
-              sx={{ '& .MuiRating-icon': { fontSize: 16 } }}
-            />
-          </Box>
-        </Box>
-
-        <Typography
-          sx={{
-            fontSize: 12,
-            color: '#ff6b6b',
-            mb: 1.2,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 0.4,
-            fontWeight: 500,
-          }}
-        >
-          🔥 4 Offers trending
-        </Typography>
-
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 0.4,
-              minWidth: 0,
-              flex: 1,
-            }}
-          >
-            <Typography sx={{ fontSize: 12, color: '#999', flexShrink: 0 }}>
-              📍
+              Cakes, Pastry, Pastas
             </Typography>
             <Typography
               sx={{
-                fontSize: 12,
-                color: '#999',
+                fontSize: 13,
+                color: '#9e9e9e',
                 fontWeight: 400,
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
@@ -147,26 +102,87 @@ const ProductCard = ({ res }) => {
             >
               {cityName}
             </Typography>
+            <Typography
+              sx={{
+                fontSize: 13,
+                fontWeight: 500,
+                color: '#c76f51',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <span
+                style={{
+                  width: 16,
+                  height: 16,
+                  display: 'inline-block',
+                  marginRight: '3px',
+                  background:
+                    "url(\"data:image/svg+xml,%3csvg width='16' height='16' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M8 1.333A6.666 6.666 0 1 0 14.667 8 6.674 6.674 0 0 0 8 1.333Zm.133 10.033a1 1 0 0 1-1.299.353.533.533 0 0 1-.2-.14l-.964-1.013a.533.533 0 0 1 0-.728l4.013-4.175a.534.534 0 0 1 .785 0l.645.671a.534.534 0 0 1 0 .728L8.8 11.365a1 1 0 0 1-.534.001Z' fill='%23c76f51'/%3e%3c/svg%3e\")",
+                  backgroundSize: '16px 16px',
+                }}
+              />
+              <Typography
+                sx={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: '#c76f51',
+                }}
+              >
+                4 Offers Trending
+              </Typography>
+            </Typography>
           </Box>
-          <Typography
+          {/* Bottom section */}
+          <Box
             sx={{
-              fontSize: 13,
-              fontWeight: '700',
-              color: '#1a1a1a',
-              flexShrink: 0,
-              ml: 1,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'end',
+              mb: 0, // no unexpected bottom margin
             }}
           >
-            ₹ 200
-          </Typography>
-        </Box>
-
-        <Typography
-          sx={{ fontSize: 11, color: '#999', mt: 1, fontWeight: 500 }}
-        >
-          Popularity
-        </Typography>
-      </CardContent>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                flexShrink: 1,
+                minWidth: 0,
+              }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  color: '#3b3b3b',
+                  fontSize: 15,
+                  fontWeight: 700,
+                }}
+              >
+                <span style={{ marginRight: 4 }}>★</span>
+                <span>4.5</span>
+              </Box>
+              <Typography
+                sx={{ fontSize: 11, color: '#9e9e9e', fontWeight: 400, mb: 0 }}
+              >
+                Popularity
+              </Typography>
+            </Box>
+            <Box sx={{ textAlign: 'right', flexShrink: 0 }}>
+              <Typography
+                sx={{ fontSize: 18, fontWeight: 700, color: '#3b3b3b' }}
+              >
+                $ 200
+              </Typography>
+              <Typography
+                sx={{ fontSize: 11, color: '#9e9e9e', fontWeight: 400, mb: 0 }}
+              >
+                Cost for two
+              </Typography>
+            </Box>
+          </Box>
+        </CardContent>
+      </Box>
     </Card>
   );
 };
