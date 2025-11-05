@@ -18,19 +18,19 @@ MealMingle Platform is a full-featured React application that allows users to re
 ### Mobile View
 
 <div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-  <img src="screenshots/register.jpg" alt="Register Mobile View" width="300" /><br>
+  <img src="screenshots/register.png" alt="Register Mobile View" width="300" /><br>
   Register Mobile View
 
-<img src="screenshots/otpverify.jpg" alt="OTP Verification Mobile View" width="300" /><br>
+<img src="screenshots/otpverify.png" alt="OTP Verification Mobile View" width="300" /><br>
   OTP Verification Mobile View
 
-<img src="screenshots/dashboardmobileview.jpg" alt="Dashboard Mobile View" width="300" /><br>
+<img src="screenshots/dashboardmobileview.png" alt="Dashboard Mobile View" width="300" /><br>
   Dashboard Mobile View
 
-<img src="screenshots/dashboardmobileview2.jpg" alt="Popular List Mobile View" width="300" /><br>
+<img src="screenshots/dashboardmobileview2.png" alt="Popular List Mobile View" width="300" /><br>
   Popular List Mobile View
 
-<img src="screenshots/restrocardmobileview.jpg" alt="Restaurant Card Mobile View" width="300" /><br>
+<img src="screenshots/restrocardmobileview.png" alt="Restaurant Card Mobile View" width="300" /><br>
   Restaurant Card Mobile View
 
 </div>
@@ -38,13 +38,13 @@ MealMingle Platform is a full-featured React application that allows users to re
 ### Desktop View
 
 <div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
-  <img src="screenshots/dashboarddesktopview.jpg" alt="Dashboard Desktop View" width="600" /><br>
+  <img src="screenshots/dashboarddesktopview.png" alt="Dashboard Desktop View" width="600" /><br>
   Dashboard Desktop View
 
-<img src="screenshots/dashboarddesktopview2.jpg" alt="Dashboard Popular Desktop View" width="600" /><br>
+<img src="screenshots/dashboarddesktopview2.png" alt="Dashboard Popular Desktop View" width="600" /><br>
   Dashboard (Popular Section) Desktop View
 
-<img src="screenshots/restrocarddesktopview.jpg" alt="Restaurant Card Desktop View" width="600" /><br>
+<img src="screenshots/restrocarddesktopview.png" alt="Restaurant Card Desktop View" width="600" /><br>
   Restaurant Card Desktop View
 
 </div>
