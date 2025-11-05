@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import axios from 'axios';
 
+
 const OtpVerify = () => {
   const [otp, setOtp] = useState(Array(6).fill(''));
   const [loading, setLoading] = useState(false);
@@ -12,17 +13,20 @@ const OtpVerify = () => {
   const phone = localStorage.getItem('fastorPhone');
   const defaultOtp = '123456';
 
+
   const handleChange = (val, index) => {
     if (val.length > 1) val = val.slice(-1);
     const newOtp = [...otp];
     newOtp[index] = val;
     setOtp(newOtp);
 
-    if (val && i < 5) {
-      const nextInput = document.getElementById(`otp-${i + 1}`);
+
+    if (val && index < 5) {
+      const nextInput = document.getElementById(`otp-${index + 1}`);
       if (nextInput) nextInput.focus();
     }
   };
+
 
   const handleKeyDown = (e, index) => {
     if (e.key === 'Backspace') {
@@ -37,19 +41,23 @@ const OtpVerify = () => {
     }
   };
 
+
   const handleVerify = async () => {
     const enteredOtp = otp.join('');
     console.log('Entered OTP:', enteredOtp);
+
 
     if (enteredOtp.length !== 6) {
       toast.error('Please enter all 6 digits');
       return;
     }
 
+
     if (enteredOtp !== defaultOtp) {
       toast.error('Invalid otp!,use default 123456 for testing!');
       return;
     }
+
 
     setLoading(true);
     try {
@@ -62,6 +70,7 @@ const OtpVerify = () => {
         }
       );
       console.log('Login response:', response);
+
 
       if (response.data.status === 'Success') {
         localStorage.setItem('fastorToken', response.data.data.token);
@@ -86,6 +95,7 @@ const OtpVerify = () => {
     }
   };
 
+
   return (
     <Box
       sx={{
@@ -98,6 +108,7 @@ const OtpVerify = () => {
       }}
     >
       <ToastContainer position='top-center' />
+
 
       <Box
         sx={{
@@ -119,6 +130,7 @@ const OtpVerify = () => {
           </IconButton>
         </Box>
 
+
         <Typography
           sx={{
             fontWeight: 700,
@@ -130,6 +142,7 @@ const OtpVerify = () => {
         >
           OTP Verification
         </Typography>
+
 
         <Typography
           sx={{
@@ -143,15 +156,18 @@ const OtpVerify = () => {
           Enter the verification code we just sent to your mobile number.
         </Typography>
 
+
         {/* OTP Inputs */}
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
-            flexWrap: 'wrap',
-            gap: 1.2,
+            gap: 1,
             mb: 3,
             width: '100%',
+            flexWrap: 'nowrap',
+            overflowX: 'auto',
+            pb: 1,
           }}
         >
           {otp.map((digit, index) => (
@@ -164,9 +180,10 @@ const OtpVerify = () => {
               onChange={(e) => handleChange(e.target.value, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
               style={{
-                width: 35,
-                height: 35,
-                fontSize: 16,
+                width: 38,
+                height: 38,
+                minWidth: 38,
+                fontSize: 13,
                 fontWeight: 700,
                 textAlign: 'center',
                 border: '2px solid #e8e8e8',
@@ -174,10 +191,12 @@ const OtpVerify = () => {
                 backgroundColor: '#fafafa',
                 outline: 'none',
                 transition: 'all 0.2s ease',
+                flexShrink: 0,
               }}
             />
           ))}
         </Box>
+
 
         <Button
           variant='contained'
@@ -200,8 +219,9 @@ const OtpVerify = () => {
           {loading ? 'Verifying...' : 'Verify'}
         </Button>
 
+
         <Typography sx={{ fontSize: 13, color: '#999', textAlign: 'center' }}>
-          Didn’t receive the code?{' '}
+          Didn't receive the code?{' '}
           <span
             style={{ color: '#ff6b6b', cursor: 'pointer', fontWeight: 600 }}
             onClick={() => navigate('/register')}
@@ -213,5 +233,6 @@ const OtpVerify = () => {
     </Box>
   );
 };
+
 
 export default OtpVerify;
