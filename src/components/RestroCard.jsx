@@ -1,19 +1,22 @@
 import { Card, CardMedia, CardContent, Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const RestroCard = ({ res }) => {
+const RestroCard = ({ res, imageUrl, rating }) => {
   const navigate = useNavigate();
 
   const onCardClick = () => {
     // console.log('Navigating to restaurant:', res.restaurant_id);
     navigate(`/restaurant/${res.restaurant_id}`, {
-      state: { restaurant: res },
+      state: {
+        restaurant: res,
+        imageUrl: imageUrl,
+      },
     });
   };
 
   const extractCity = (addr) => {
     if (!addr || addr === 'null') {
-      return 'Location';
+      return 'Old Delhi';
     }
     const parts = addr.split(',');
     return parts.length >= 2 ? parts.slice(-2).join(', ').trim() : 'Location';
@@ -44,7 +47,7 @@ const RestroCard = ({ res }) => {
       >
         <CardMedia
           component='img'
-          image='https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=800&q=60'
+          image={imageUrl}
           alt={res.restaurant_name}
           sx={{
             width: 124,
@@ -60,8 +63,8 @@ const RestroCard = ({ res }) => {
         <CardContent
           sx={{
             flex: 1,
-            py: 0, // removes default vertical padding
-            px: 2, // keeps only horizontal padding
+            py: 0, 
+            px: 2, 
             minHeight: 130,
             height: 130,
             boxSizing: 'border-box',
@@ -70,7 +73,7 @@ const RestroCard = ({ res }) => {
             justifyContent: 'space-between',
           }}
         >
-          {/* Top section */}
+          
           <Box>
             <Typography
               sx={{
@@ -133,13 +136,13 @@ const RestroCard = ({ res }) => {
               </Typography>
             </Typography>
           </Box>
-          {/* Bottom section */}
+         
           <Box
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'end',
-              mb: 0, // no unexpected bottom margin
+              mb: 0, 
             }}
           >
             <Box

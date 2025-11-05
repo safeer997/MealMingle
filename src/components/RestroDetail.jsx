@@ -15,6 +15,22 @@ const RestroDetail = () => {
     address_complete: 'Connaught Place, New Delhi',
   };
 
+  const imageUrl =
+    location.state?.imageUrl ||
+    'https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=800&q=60';
+
+  const extractCity = (addr) => {
+    if (!addr || addr === 'null') {
+      return 'Old Delhi';
+    }
+    const parts = addr.split(',');
+    return parts.length >= 2
+      ? parts.slice(-2).join(', ').trim()
+      : 'South Delhi';
+  };
+
+  const cityName = extractCity(restaurant.address_complete);
+
   const toggleFavorite = () => {
     console.log('Toggling favorite:', !fav);
     setFav(!fav);
@@ -61,7 +77,7 @@ const RestroDetail = () => {
       </Box>
       <CardMedia
         component='img'
-        image='https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=800&q=60'
+        image={imageUrl}
         alt={restaurant.restaurant_name}
         sx={{
           width: '100%',
@@ -129,7 +145,7 @@ const RestroDetail = () => {
             mb: 1.5,
           }}
         >
-          {restaurant.address_complete}
+          {cityName}
         </Typography>
 
         <Box

@@ -57,10 +57,22 @@ const highlightRestro = [
   { name: 'Cakery', place: 'Connaught Place, New Delhi' },
 ];
 
+const imagePool = [
+  'https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=60',
+  'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=60',
+];
+
 const Home = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState('');
+  const [restaurantImages, setRestaurantImages] = useState({});
 
   async function fetchRestaurants() {
     // console.log('Fetching restaurants');
@@ -87,7 +99,16 @@ const Home = () => {
       // console.log('Restaurant response:', response);
 
       if (response.data.status === 'Success') {
-        setRestaurants(response.data.data.results);
+        const restaurantData = response.data.data.results;
+        setRestaurants(restaurantData);
+        const imageMap = {};
+        for (let i = 0; i < restaurantData.length; i++) {
+          const restaurant = restaurantData[i];
+          const randomIndex = Math.floor(Math.random() * imagePool.length);
+          const randomImage = imagePool[randomIndex];
+          imageMap[restaurant.restaurant_id] = randomImage;
+        }
+        setRestaurantImages(imageMap);
       } else {
         toast.error(response.data.message || 'Failed to load restaurants');
       }
@@ -364,7 +385,11 @@ const Home = () => {
         {!loading && restaurants.length > 0 && (
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             {restaurants.map((res) => (
-              <RestroCard key={res.restaurant_id} res={res} />
+              <RestroCard
+                key={res.restaurant_id}
+                res={res}
+                imageUrl={restaurantImages[res.restaurant_id]}
+              />
             ))}
           </Box>
         )}
