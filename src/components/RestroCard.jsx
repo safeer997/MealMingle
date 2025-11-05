@@ -63,8 +63,8 @@ const RestroCard = ({ res, imageUrl, rating }) => {
         <CardContent
           sx={{
             flex: 1,
-            py: 0, 
-            px: 2, 
+            py: 0,
+            px: 2,
             minHeight: 130,
             height: 130,
             boxSizing: 'border-box',
@@ -73,7 +73,6 @@ const RestroCard = ({ res, imageUrl, rating }) => {
             justifyContent: 'space-between',
           }}
         >
-          
           <Box>
             <Typography
               sx={{
@@ -125,24 +124,24 @@ const RestroCard = ({ res, imageUrl, rating }) => {
                   backgroundSize: '16px 16px',
                 }}
               />
-              <Typography
-                sx={{
+              <span
+                style={{
                   fontSize: 13,
                   fontWeight: 600,
                   color: '#c76f51',
                 }}
               >
                 4 Offers Trending
-              </Typography>
+              </span>
             </Typography>
           </Box>
-         
+
           <Box
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'end',
-              mb: 0, 
+              mb: 0,
             }}
           >
             <Box

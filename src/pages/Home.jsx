@@ -17,28 +17,28 @@ import axios from 'axios';
 
 const swiperSlidesData = [
   {
-    title: 'VEGGIE FRIENDLY EATERIES',
+    title: 'VEGGIE FRIENDLY\nEATERIES',
     chipLabel: 'TRY NOW',
-    bgColor: '#8B6F47',
-    emoji: '🥗',
+    bgImage:
+      'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=60',
   },
   {
-    title: 'TOP RATED CAFES',
+    title: 'TOP RATED\nCAFES',
     chipLabel: 'EXPLORE',
-    bgColor: '#5C5470',
-    emoji: '☕',
+    bgImage:
+      'https://images.unsplash.com/photo-1495521821757-a1efb6729352?auto=format&fit=crop&w=800&q=60',
   },
   {
-    title: 'HOT & SPICY PICKS',
+    title: 'HOT & SPICY \nPICKS',
     chipLabel: 'SHOW ME',
-    bgColor: '#D7263D',
-    emoji: '🌶️',
+    bgImage:
+      'https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=60',
   },
   {
-    title: 'DESSERT DESTINATIONS',
+    title: 'DESTINATION \nDESSERTS',
     chipLabel: 'INDULGE',
-    bgColor: '#F49D6E',
-    emoji: '🍰',
+    bgImage:
+      'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=60',
   },
 ];
 
@@ -264,9 +264,9 @@ const Home = () => {
             '&::-webkit-scrollbar': { display: 'none' },
           }}
         >
-          {highlightRestro.map((item) => (
+          {highlightRestro.map((item, index) => (
             <Card
-              key={item.name}
+              key={index}
               sx={{
                 minWidth: '135px',
                 borderRadius: '10px',
@@ -319,12 +319,14 @@ const Home = () => {
           spaceBetween={0}
           slidesPerView={1}
         >
-          {swiperSlidesData.map((slide, idx) => (
-            <SwiperSlide key={idx}>
+          {swiperSlidesData.map((slide, index) => (
+            <SwiperSlide key={index}>
               <Box
                 sx={{
                   height: '200px',
-                  bgcolor: slide.bgColor,
+                  backgroundImage: `linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%), url('${slide.bgImage}')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
                   borderRadius: '10px',
                   display: 'flex',
                   alignItems: 'center',
@@ -334,13 +336,14 @@ const Home = () => {
                   overflow: 'hidden',
                 }}
               >
-                <Box sx={{ color: 'white', zIndex: 2 }}>
+                <Box sx={{ color: 'white', zIndex: 10, position: 'relative' }}>
                   <Typography
                     sx={{
                       fontSize: '20px',
                       fontWeight: '700',
                       mb: 1.2,
                       lineHeight: '1.2',
+                      whiteSpace: 'pre-line',
                     }}
                   >
                     {slide.title}
@@ -356,14 +359,21 @@ const Home = () => {
                     }}
                   />
                 </Box>
-                <Typography sx={{ fontSize: '100px', opacity: 0.15, mr: -3 }}>
-                  {slide.emoji}
-                </Typography>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    right: 10,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    zIndex: 5,
+                  }}
+                ></Box>
               </Box>
             </SwiperSlide>
           ))}
         </Swiper>
       </Box>
+
       <Box sx={{ p: 2, pt: 2 }}>
         <Typography
           sx={{
